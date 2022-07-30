@@ -17,10 +17,10 @@ namespace E_Comm.DAL
 
         public int AddOrder(Order order)
         {
-            string qry = "insert into Order_table values(@o_id,@p_Id,@userid,@Price,@quantity)";
+            string qry = "insert into Order_table values(@p_Id,@userid,@Price,@quantity)";
             cmd = new SqlCommand(qry, con);
 
-            cmd.Parameters.AddWithValue("@o_id", order.o_id);
+            
             cmd.Parameters.AddWithValue("@userid", order.userid);
             cmd.Parameters.AddWithValue("@p_Id", order.p_Id);
             cmd.Parameters.AddWithValue("@Price", order.Price);
@@ -34,8 +34,8 @@ namespace E_Comm.DAL
         public List<Product> ViewOrder(string userid)
         {
             List<Product> plist = new List<Product>();
-            string qry = "select p.p_Id,p.Price, o.o_id,o.userid from Product p " +
-                        " inner join Order o on o.p_Id = p.p_Id " +
+            string qry = "select p.p_Id ,p.p_Name, p.Price,o.o_id , o.userid ,o.quantity from Product p " +                
+                        " inner join Order_table o on o.p_Id = p.p_Id " +
                         " where o.userid = @userid";
             cmd = new SqlCommand(qry, con);
             cmd.Parameters.AddWithValue("@userid", Convert.ToInt32(userid));
@@ -47,9 +47,11 @@ namespace E_Comm.DAL
                 {
                     Product p = new Product();
                     p.p_Id = Convert.ToInt32(dr["p_Id"]);
+                    p.p_Name= dr["p_Name"].ToString();
                     p.Price = Convert.ToInt32(dr["Price"]);
-                    p.c_id = Convert.ToInt32(dr["c_id"]);
                     p.userid = Convert.ToInt32(dr["userid"]);
+                    p.o_id = Convert.ToInt32(dr["o_id"]);
+                    p.quantity = Convert.ToInt32(dr["quantity"]);
                     plist.Add(p);
                 }
                 con.Close();

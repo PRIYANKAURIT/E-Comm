@@ -24,11 +24,10 @@ namespace E_Comm.DAL
             bool result = CheckCartData(cart);
             if (result == true)
             {
-                string qry = "insert into Cart values(@c_id,@userid,@p_Id)";
+                string qry = "insert into Cart values(@p_Id,@userid)";
                 cmd = new SqlCommand(qry, con);
                 cmd.Parameters.AddWithValue("@userid", cart.userid);
                 cmd.Parameters.AddWithValue("@p_Id", cart.p_Id);
-                cmd.Parameters.AddWithValue("@c_id", cart.c_id);
                 con.Open();
                 int res = cmd.ExecuteNonQuery();
                 con.Close();

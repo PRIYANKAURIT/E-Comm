@@ -55,8 +55,8 @@
                 @Html.DisplayFor(modelItem => item.userid)
             </td>
             <td>
-                @Html.ActionLink("Remove", "RemoveFromCart", new { cid=item.c_id }) |
-                @Html.ActionLink("AddOrder", "AddOrder", new { o_id=item.o_id })
+                @Html.ActionLink("Remove", "RemoveFromCart", new { id=item.c_id }) |
+                @Html.ActionLink("AddOrder", "AddOrder", new { id=item.p_Id })
             </td>
         </tr>
 }

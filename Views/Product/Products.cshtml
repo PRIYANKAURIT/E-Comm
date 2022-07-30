@@ -43,7 +43,9 @@
                 @Html.DisplayFor(modelItem => item.Company_name)
             </td>
             <td>
-                @Html.ActionLink("AddToCart", "AddToCart", new { id=item.p_Id }) 
+                @Html.ActionLink("AddToCart", "AddToCart", new { id=item.p_Id }) |
+                @Html.ActionLink("ViewProductsFromCart", "AddToCart", new { id=item.p_Id })
+
                
             </td>
         </tr>

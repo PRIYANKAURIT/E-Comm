@@ -120,7 +120,7 @@ namespace E_Comm.Controllers
             Cart cart = new Cart();
             cart.p_Id = id;
             cart.userid = Convert.ToInt32(userid);
-            cart.c_id = id;
+           
             int res = cdb.AddToCart(cart);
             if (res == 1)
             {
@@ -141,9 +141,9 @@ namespace E_Comm.Controllers
         }
 
         [HttpGet]
-        public IActionResult RemoveFromCart(int cid)
+        public IActionResult RemoveFromCart(int id)
         {
-            int res = cdb.RemoveFromCart(cid);
+            int res = cdb.RemoveFromCart(id);
             if (res == 1)
             {
                 return RedirectToAction("ViewToCart");
@@ -183,9 +183,9 @@ namespace E_Comm.Controllers
         }
 
         [HttpGet]
-        public IActionResult DeleteOrder(int cid)
+        public IActionResult DeleteOrder(int id)
         {
-            int res = ddb.DeleteOrder(cid);
+            int res = ddb.DeleteOrder(id);
             if (res == 1)
             {
                 return RedirectToAction("ViewOrder");

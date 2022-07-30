@@ -8,5 +8,7 @@
         public string Company_name { get; set; }
         public int c_id { get; set; }       
         public int userid { get; set; }
+        public int o_id { get; set; }
+
     }
 }

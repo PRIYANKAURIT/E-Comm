@@ -10,6 +10,7 @@ namespace E_Comm.Controllers
     {
         ProductDAL db = new ProductDAL();
         CartDAL cdb = new CartDAL();
+        OrderDAL ddb = new OrderDAL();
         public IActionResult Index()
         {
             var model = db.GetAllProducts();
@@ -152,9 +153,47 @@ namespace E_Comm.Controllers
                 return View();
             }
         }
-        public IActionResult PlaceOrder()
+        [HttpGet]
+        public IActionResult ViewOrder()
         {
-            return View();
+            string userid = HttpContext.Session.GetString("userid");
+            var model = ddb.ViewOrder(userid);
+            return View(model);
+        }
+
+        [HttpGet]
+        public IActionResult AddOrder(int id)
+        {
+            string userid = HttpContext.Session.GetString("userid");
+            Order order = new Order();
+            order.p_Id = id;
+            order.userid = Convert.ToInt32(userid);
+            order.o_id = id;
+            order.Price = Convert.ToInt32(order.Price);
+            order.quantity=Convert.ToInt32(order.quantity);
+            int res = ddb.AddOrder(order);
+            if (res == 1)
+            {
+                return RedirectToAction("ViewOrder");
+            }
+            else
+            {
+                return View();
+            }
+        }
+
+        [HttpGet]
+        public IActionResult DeleteOrder(int cid)
+        {
+            int res = ddb.DeleteOrder(cid);
+            if (res == 1)
+            {
+                return RedirectToAction("ViewOrder");
+            }
+            else
+            {
+                return View();
+            }
         }
     }
 }

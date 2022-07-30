@@ -81,6 +81,12 @@ namespace E_Comm.DAL
             con.Close();
             return res;
         }
+
+        /*public int BuyNow(int id)
+        {
+            string qry = "select * from Cart "
+        }*/
+
     }
 }
     
